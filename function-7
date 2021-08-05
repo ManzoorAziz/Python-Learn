@@ -1,0 +1,81 @@
+#Consult this blood pressures chart: http://bit.ly/2CloACs
+#
+#Write a function called check_blood_pressure that takes two
+#parameters: a systolic blood pressure and a diastolic blood
+#pressure, in that order. Your function should return "Low",
+#"Ideal", "Pre-high", or "High" -- whichever corresponds to
+#the given systolic and diastolic blood pressure.
+#
+#You should assume that if a combined blood pressure is on the
+#line between two categories (e.g. 80 and 60, or 120 and 70),
+#the result should be the higher category (e.g. Ideal and
+#Pre-high for those two combinations).
+#
+#HINT: Don't overcomplicate this! Think carefully about in
+#what order you should check the different categories. This
+#problem could be easy or extremely hard depending on the
+#order you change and whether you use returns or elifs wisely.
+
+
+#Add your code here!
+        
+
+#Below are some lines of code that will test your function.
+#You can change the value of the variable(s) to test your
+#function with different inputs.
+#
+#If your function works correctly, this will originally
+#print: Ideal
+test_systolic = 80
+test_diastolic = 50
+
+print(check_blood_pressure(test_systolic, test_diastolic))
+
+---------------------------------------------------------------------------
+#Sample Solution
+
+#First, we define the function. It has two parameters:
+#systolic and diastolic.
+def check_blood_pressure(systolic, diastolic):
+    
+    #Low blood pressure is easy: systolic must be under 90
+    #and diastolic must be under 60.
+    if systolic < 90 and diastolic < 60:
+        return "Low"
+    
+    #For Ideal, we know that systolic must be less than 120
+    #and less than 80. However, how do we handle making sure
+    #it's Ideal and not Low? For example, if systolic is 80,
+    #then diastolic needs to be above 60, but if systolic is
+    #100, then diastolic just needs to be above 40.
+    #
+    #But we don't need to worry about that! If it was Low,
+    #then the function would have already ended based on the
+    #conditional above. So, if we reach this line, we *know*
+    #that it isn't low. So, we just check if it's Ideal:
+    elif systolic < 120 and diastolic < 80:
+        return "Ideal"
+    
+    #By that same logic, if we reach the next conditional,
+    #we know it's neither Low nor Ideal: so, we just check
+    #if it's Pre-high:
+    elif systolic < 140 and diastolic < 90:
+        return "Pre-high"
+    
+    #If it's not Low, Ideal, or Pre-high, it must be High:
+    else:
+        return "High"
+
+
+
+test_systolic = 110
+test_diastolic = 70
+
+print(check_blood_pressure(test_systolic, test_diastolic))
+
+
+
+
+
+
+
