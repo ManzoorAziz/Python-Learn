@@ -1,0 +1,151 @@
+#We've come a long way in this unit! You've learned about
+#conditionals, loops, functions, and error handling. To end
+#the unit, let's do a couple problems that tie all these
+#concepts together.
+#
+#Write a function called word_count. word_count takes as
+#input a string called my_string, and returns as output the
+#number of words in the string. For the purposes of this
+#problem, you can assume that every space indicates a new
+#word; so, the number of words should be one more than the
+#number of spaces. You may also assume that any strings are
+#not empty, so there should always be at least one word if
+#my_string is a string.
+#
+#Note, though, that it could be the case that a non-string
+#is accidentally passed in as the argument for my_string. If
+#that happens, an error will arise. If such an error arises,
+#you should instead return "Not a string". Otherwise,
+#return an integer representing the number of words in the
+#string.
+
+
+#Write your function here!
+
+
+#Below are some lines of code that will test your function.
+#You can change the value of the variable(s) to test your
+#function with different inputs.
+#
+#If your function works correctly, this will originally
+#print: 
+#Word Count: 4
+#Word Count: 1
+#Word Count: 7
+#Word Count: Not a string
+#Word Count: Not a string
+#Word Count: Not a string
+
+print("Word Count:", word_count("Four words are here!"))
+print("Word Count:", word_count("One."))
+print("Word Count:", word_count("There are seven words in this sentence."))
+print("Word Count:", word_count(5))
+print("Word Count:", word_count(5.1))
+print("Word Count:", word_count(True))
+
+
+
+----------------------------------------------------------------------------------------------------------------
+#Sample Solution1
+
+#There are actually a lot of ways we could do this, but
+#most of them use things we haven't covered yet. Check out
+#sample_answer_2.py for some alternatives, but first, let's
+#look at how to do this using only what we know so far.
+#
+#The directions noted that you can assume that one space
+#divides every pair of words, so we're basically counting
+#the spaces and adding one.
+#
+#So, as always, we start with our function definition:
+
+def word_count(my_string):
+    
+    #Now, we want to first assume that my_string is, in
+    #fact, a string, and process it accordingly. We know
+    #that this process might generate an error, though, so
+    #we wrap it in a try block:
+    
+    try:
+        
+        #Inside the try, we start a counter of the number
+        #of words we've found. We'll start it at 1 because
+        #we know that each space signifies a new word, and
+        #we assume there's at least one word.
+        
+        word_count = 1
+        
+        #Then, we iterate over each character in the string...
+        for character in my_string:
+            
+            #...and count it if it's a space.
+            
+            if character == " ":
+                word_count += 1
+        
+        #Then, finally, we return the number of words.
+        return word_count
+    
+    #Then, we know that if my_string wasn't actually a
+    #string, a TypeError will arise. So, we want to catch
+    #TypeErrors:
+    except TypeError:
+        
+        #And return a message if so:
+        return "Not a string"
+    
+    #In theory, we could just leave off 'TypeError' here
+    #because TypeError is the only error we anticipate
+    #happening. It's better design, though, to only catch
+    #the errors you're anticipating. That way, if something
+    #unexpected happens, you're properly alerted.
+
+
+print("Word Count:", word_count("Four words are here!"))
+print("Word Count:", word_count("One."))
+print("Word Count:", word_count("There are seven words in this sentence."))
+print("Word Count:", word_count(5))
+print("Word Count:", word_count(5.1))
+print("Word Count:", word_count(True))
+
+#Using what we know now, that's the best way to accomplish
+#this problem. However, there are other ways using things
+#that we don't know yet. Check out sample_answer_2.py to
+#see some!
+
+
+
+
+------------------------------------------------------------------------------------------
+#Sample Solution2
+
+#-----------------------------------------------------------
+#Here are a few alternate approaches to this problem. First,
+#Python has a built-in method that counts the number of
+#characters in a string. We still need to do our error
+#handling, but we don't have to manually count spaces:
+
+def word_count(my_string):
+    try:
+        return my_string.count(" ") + 1
+    except:
+        return "Not a string"
+
+#We could also use the split method, which we'll learn about
+#in chapter 4.2. The split method splits a string up into
+#a list of multiple smaller strings, divided wherever a
+#certain character occurs. So, if we split by spaces, then
+#the number of strings that results is the number of words:
+
+def word_count(my_string):
+    try:
+        return len(my_string.split(" "))
+    except:
+        return "Not a string"
+    
+#There are other ways to do this, too, but these are two
+#common ones!
+
+
+
+
