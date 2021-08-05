@@ -1,0 +1,134 @@
+egg = True
+milk = True
+butter = True
+flour = True
+
+#You may modify the lines of code above, but don't move them!
+#When you Submit your code, we'll change these lines to
+#assign different values to the variables.
+
+#Imagine you're deciding what you want to cook. The boolean
+#variables above state whether or not you have each of those
+#four ingredients.
+#
+#Here are the dishes you know how to cook and their
+#ingredients:
+#
+# 1. pancakes: egg, milk, butter, flour
+# 2. omelette: egg, milk, butter
+# 3. custard: egg, milk
+# 4. poached eggs: egg
+#
+#The list above is also a priority list. If you have the
+#ingredients for pancakes, you'll make pancakes instead of
+#any of the other dishes. If you're missing flour but have
+#the other ingredients, you'll make an omlette. You'll only
+#make poached eggs if the only ingredient you have is eggs.
+#
+#Complete the program below such that it prints which dish
+#you'll make based on the ingredients you have handy. All
+#the dishes should appear exactly as shown above: all lower
+#case, spelled the same way. If you do not have the
+#ingredients to make any of these dishes, then print the
+#text "Go to the store!"
+
+-----------------------------------------------------------------------
+#Sample Solution1
+
+if (egg and milk and butter and flour)==1:
+    print("pancakes")
+elif (egg and milk and butter)==1:
+    print("omelette")
+elif (egg and milk)==1:
+    print("custard")
+elif egg==1:
+    print("poached eggs")
+else:
+    print("Go to the store!")
+ ---------------------------------------------------------------------
+ 
+ #Sample Solution2
+ 
+ egg = True
+milk = True
+butter = True
+flour = True
+
+#Based on what you've seen so far, the most obvious way to
+#do this is to have a separate if statement for each
+#possible recipe. Then, if we can't make any of them, print
+#"Go to the store!".
+#
+#It's important, though, that we put them in the right order.
+#Imagine if you did this:
+
+#if egg:
+#    print("poached eggs")
+#elif egg and milk:
+#    print("custard")
+
+#The if egg and milk are both true, we want to print
+#"custard". However, the first condition will trigger because
+#egg is true, so we'll never check the second because it's an
+#else. So, we want to check these conditions in the order of
+#priority:
+
+if egg and milk and butter and flour:
+    print("pancakes")
+elif egg and milk and butter:
+    print("omelette")
+elif egg and milk:
+    print("custard")
+elif egg:
+    print("poached eggs")
+else:
+    print("Go to the store!")
+    
+#However, there is a better way to do this. Check out the
+#other sample answer to see!
+
+-----------------------------------------------------------------------------
+#Sample Solution3
+egg = True
+milk = True
+butter = True
+flour = True
+
+#One bit of inefficiency with the previous code is that we
+#checked egg four times, milk three times, and butter twice.
+#Ideally, though, we would never check any of them more than
+#once. Here's a redesigned version that works that way:
+
+if egg:
+    if milk:
+        if butter:
+            if flour:
+                print("pancakes")
+            else:
+                print("omelette")
+        else:
+            print("custard")
+    else:
+        print("poached eggs")
+else:
+    print("Go to the store!")
+
+#egg is required for all our dishes. So, we know if egg is
+#False, we can go ahead and print "Go to the store!": we can't
+#make anything without eggs. So, our top-level (least indented)
+#conditional checks egg, and if egg is False, it jumps straight
+#to the else at the very end.
+#
+#If egg is true, though, we know that we're guaranteed to make
+#one of our recipes. So, we don't need to check egg again: now
+#we just need to see if we have milk, butter, and flour. If we
+#don't have milk, then we know what we're making: poached eggs.
+#
+#If both egg and milk are true, we know we'll either make
+#pancakes, custard, or an omelette. So, instead of checking
+#every dish's ingredient every time, we instead can sort of
+#narrow down our list of possible results.
+
+
+
+
