@@ -1,0 +1,45 @@
+mystery_int = 7
+
+#You may modify the lines of code above, but don't move them!
+#When you Submit your code, we'll change these lines to
+#assign different values to the variables.
+
+#Write a for loop that prints every third number from 1 to
+#mystery_int inclusive (meaning that if mystery_int is 7, it
+#prints 1, 4, and 7). Print each number on a separate line.
+#
+#Hint: There are multiple ways to do this! You might use the
+#modulus operators, or you could use the third argument for
+#range().
+-----------------------------------------------------------------------
+
+#Sample Solution1
+
+for mystery_int in range(1,mystery_int+1,3):
+    print (mystery_int)
+    
+-------------------------------------------------------------------------
+#Sample Soultion2
+mystery_int = 50
+
+#There are at least two ways we could do this. The first
+#uses an extra arugment for range():
+
+for i in range(1, mystery_int + 1, 3):
+    print(i)
+
+#By adding 3 as our third argument (called the 'step'), we
+#tell Python to give us every 3rd number starting at 1.
+#Note that we have to run to mystery_int + 1 because the
+#range function runs up to, but does not include, the
+#second argument. If we exclude the + 1, then we wouldn't
+#get the last number in some cases.
+
+#The other approach is to use the modulus function: iterate
+#over every number, but only print if dividing it by 3
+#gives a remainder of 1. That's what's in common between
+#the numbers 1, 4, 7, 10, etc.:
+
+for i in range(1, mystery_int + 1):
+    if i % 3 == 1:
+        print(i)
