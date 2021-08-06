@@ -1,0 +1,160 @@
+#Write a function called "num_changer" that accepts a string 
+#of digits (0-9). You should make an integer from the digits 
+#of the even indices and another number from the digits in 
+#the odd indices. Return the sum of these two numbers. You 
+#can assume the given string will have a length of at least 
+#2 digits.
+#
+#For example, if the string was "123456", you would split
+#this into two integers, 135 and 246. Adding them would give
+#381. Or if the string was "13579", you would split this into
+#159 and 37, then add them to get 196.
+#
+#Hint: You can do this with loops, but it's easier to do
+#this with string slicing. Remember how we could pass a third
+#argument to range() that would tell range how many numbers
+#to skip? You can do something similar with string slices: if
+#you include second colon in a string slice, the number
+#that follows it lets you skip characters in the string. For
+#example:
+#
+# "Hello, world!"[1:9] -> This gives "ello, wo".
+# "Hello, world!"[1:9:2] -> This gives "el,w". Including :2
+#    in the string slice skips every other letter. 
+# "Hello, world!" [::3] -> This gives "Hl r!". Leaving the
+#    first two spots blank tells it to look at the entire
+#    string, but putting :3 at the end says to only take
+#    every third character (H, l, space, r, and !).
+#
+#Hint 2: Remember, Python is zero-indexed. That means the
+#first number in the string is at position 0, and so it goes
+#in the even list.
+
+
+#Write your function here!
+def num_changer(mystring):
+    even=mystring[0:len(mystring):2]
+    #print(even)
+    odd=mystring[1:len(mystring):2]
+    #print(odd)
+    return int(even)+int(odd)
+    
+
+
+#Below are some lines of code that will test your function.
+#You can change the value of the variable(s) to test your
+#function with different inputs.
+#
+#If your function works correctly, this will originally
+#print: 123456 -> 381
+string_int = "123456"
+result = num_changer(string_int)
+print(string_int + " -> " + str(result))
+
+
+
+
+-----------------------------------------------------------------------------------------------
+#Sample Solution
+
+#We'll start with the function header. The function is
+#called num_changer, and we'll call its one parameter
+#digits:
+
+def num_changer(digits):
+    
+    #Next, we need to separate out the even digits and the
+    #odd digits. We could do that with a pair of loops, but
+    #the simpler way is to slice the string.
+    #
+    #First, let's get the digits in even locations. That
+    #means start with the first digit (which is at location
+    #0), and select every other digit until the end.
+        
+    even_digits = digits[0::2]
+    
+    #Note that above, we technically don't need the first
+    #0 -- we're keeping it here to emphasize the difference
+    #between getting the even digits and getting the odd.
+    #If we just did digits[::2], then Python reads the
+    #missing numbers between the colons as meaning
+    #'beginning' and 'end'.
+    #
+    #Next, we'll get the odd digits. The syntax is the
+    #same, but we start with the second digit, which is at
+    #index 1:
+    
+    odd_digits = digits[1::2]
+    
+    #Now, even_digits and odd_digits are both strings. We
+    #want to add them together as integers, though. So, we
+    #convert them to integers, then add:
+    
+    return int(even_digits) + int(odd_digits)
+
+#Want to see how to do this with loops, though? Check out
+#sample_answer_2.py.
+
+string_int = "123456"
+result = num_changer(string_int)
+print(string_int + " -> " + str(result))
+
+
+
+
+----------------------------------------------------------------------------
+#Sample Solution2
+
+#If we want to do this with loops, our function header will
+#stay the same:
+
+def num_changer(digits):
+    
+    #Next, we'll run a loop over each character in digits
+    #and assign it to either even_digits or odd_digits
+    #depending on its index. That means, though, that we
+    #first must create the strings even_digits and
+    #odd_digits to add to:
+    
+    even_digits = ""
+    odd_digits = ""
+    
+    #Now, we run our loop. We could do this two ways: a
+    #for-each loop that keeps track of the current index
+    #manually, or a for loop that uses the loop variable to
+    #look up the right character in digits. Since this
+    #chapter is on strings, let's use the latter:
+    
+    for i in range(0, len(digits)):
+        
+        #Now, we want to decide whether the current
+        #character is at an even index or an odd index. We
+        #can use the modulus operator for that:
+        
+        if i % 2 == 0:
+            
+            #If that's true, then this is an even index,
+            #so we add the current character to even_digits:
+            
+            even_digits += digits[i]
+            
+        else:
+            
+            #Otherwise, it's odd, so we add it to odd_digits:
+            
+            odd_digits += digits[i]
+    
+    #Now, the result when we reach this line is the same as
+    #when we used string slicing, so our final line is the
+    #same:
+    
+    return int(even_digits) + int(odd_digits)
+
+
+string_int = "123456"
+result = num_changer(string_int)
+print(string_int + " -> " + str(result))
+
+
+
+
